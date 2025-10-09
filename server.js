@@ -7,8 +7,9 @@ const route = require('./routes')
 const cors = require('cors')
 const User = require('./models/UserModel')
 
-//trata o body da requisiçao
-app.use(Express.urlencoded({extended:true}))
+app.use(cors({origin:"http://localhost:3001"})) //permite se comunicar apenas com a url passada
+app.use(Express.json()) //trata JSON antes das  rotas
+app.use(Express.urlencoded({extended:true})) //trata o body da requisiçao
 
 mongoose.connect(process.env.URLBANCO).then(() =>{
     try{
@@ -20,21 +21,6 @@ mongoose.connect(process.env.URLBANCO).then(() =>{
 })
 
 app.use(route)
-
-
-app.use(Express.json())
-app.use(cors())
-
-//funçao teste 
-async function run(){
-    const user = await User.create({name:'Davi de lucas', age:20})
-
-    const users = await User.find()
-    
-    console.log(users)
-}
-
-run()
 
 app.on('pronto',() =>{
     app.listen(process.env.PORT, () => {

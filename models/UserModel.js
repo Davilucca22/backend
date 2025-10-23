@@ -12,6 +12,10 @@ const UserSchema = new mongoose.Schema({
     senha:{
         type:String,
         required:true
+    },
+    fotoPerfil:{
+        type:String,
+        required:true
     }
 })
 

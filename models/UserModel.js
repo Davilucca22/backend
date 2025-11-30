@@ -16,6 +16,10 @@ const UserSchema = new mongoose.Schema({
     fotoPerfil:{
         type:String,
         required:true
+    },
+    dataNasc:{
+        type:String,
+        required:true
     }
 })
 

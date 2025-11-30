@@ -7,7 +7,10 @@ const route = require('./routes')
 const cors = require('cors')
 const User = require('./models/UserModel')
 
-app.use(cors({origin:process.env.URLFRONT})) //permite se comunicar apenas com a url passada
+app.use(cors({
+    origin:process.env.URLFRONT,
+    credentials:true
+})) //permite se comunicar apenas com a url passada
 app.use(Express.json()) //trata JSON antes das  rotas
 app.use(Express.urlencoded({extended:true})) //trata o body da requisiçao
 

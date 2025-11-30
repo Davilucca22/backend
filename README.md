@@ -1,2 +1,2 @@
 # backend
-backend para usar no projeto mini blog
+backend para usar no projeto blog com node

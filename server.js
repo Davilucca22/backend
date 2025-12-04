@@ -1,16 +1,17 @@
 require('dotenv').config()
-
 const Express = require('express')
 const app = Express()
 const mongoose = require('mongoose')
 const route = require('./routes')
 const cors = require('cors')
 const User = require('./models/UserModel')
+const session = require('express-session')
 
 app.use(cors({
     origin:process.env.URLFRONT,
     credentials:true
 })) //permite se comunicar apenas com a url passada
+
 app.use(Express.json()) //trata JSON antes das  rotas
 app.use(Express.urlencoded({extended:true})) //trata o body da requisiçao
 
@@ -22,6 +23,15 @@ mongoose.connect(process.env.URLBANCO).then(() =>{
         console.log('ERRO AO CONECTAR AO BANCO DE DADOS')
     }
 })
+
+app.use(session({ //config basica para sessoes
+    secret: 'nlkandklnaklncklasnklasnfkansfklanflknklanklancklnaklnkanfkanfklnklcanksfnfnscbsfdvavav',
+    resave:false,
+    saveUninitialized:false,
+    cookie:{
+        httpOnly:true
+    }
+}))
 
 app.use(route)
 

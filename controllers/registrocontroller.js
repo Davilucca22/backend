@@ -5,6 +5,7 @@ import argon2 from 'argon2'
 import multer from "multer"
 import {v4 as uuid} from "uuid"
 import AWS from 'aws-sdk'
+import session from 'express-session'
 
 const upload = multer({storage:multer.memoryStorage()}) //armazena os arquivos enviados pelo front direto na memória RAM, e não no disco local.
 
@@ -41,6 +42,7 @@ export const cadastro = async (req,res) =>{
             fotoURL = Location
 
         }else{
+
             key = "usuarios/semfoto/semfoto.jpeg" //se o usuario nao enviar foto, sera usada a foto padrao q esta nesse caminho no S3
 
             fotoURL = `https://${process.env.S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}` //url da foto
@@ -51,11 +53,13 @@ export const cadastro = async (req,res) =>{
         if(users){
             res.json({msg:"Email ja cadastrado"})
         }else{
-            const user = await User.create({name:nome, email:email, senha:SenhaHash, fotoPerfil:fotoURL, dataNasc:dataNasc}) //salva dados no banco de dados
-            res.json({msg:"Seja Bem Vindo"})
+            const user = await User.create({name:nome, email:email, senha:SenhaHash, fotoPerfil:fotoURL, dataNasc:dataNasc, posts:[]}) //salva dados no banco de dados
+            req.session.user = { email:email }
+            res.json({msg:"seja bem vindo"})
         }
-        
+
     }catch(err){
         console.log(err)
     }
+
 }

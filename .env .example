@@ -6,3 +6,4 @@ AWS_SECRET_ACESS_KEY=Chave_de_acesso_secreta (gerada no console do amazonS3)
 AWS_REGION=regiao_do_Bucket
 S3_BUCKET_NAME=nome_do_seu_Bucket
 SENHA_CONSOLE=sua senha aqui
+SECRET:chavesecretaaleatoria

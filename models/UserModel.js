@@ -20,6 +20,10 @@ const UserSchema = new mongoose.Schema({
     dataNasc:{
         type:String,
         required:true
+    },
+    posts:{
+        type:Array,
+        required:false        
     }
 })
 

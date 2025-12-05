@@ -7,14 +7,16 @@ export const Login = async (req,res) =>{
 
     const users = await User.find({email:dados.email})
 
-    if(users){
+    if(users.length != 0 ){
 
-        const compSenha = await argon2.verify(users[0].senha,dados.senha) //users.senha vem undefined
+        const user = users[0]
+
+        const compSenha = await argon2.verify(user.senha,dados.senha) //users.senha vem undefined
         if(!compSenha){ 
             res.json({msgerr:"senha incorreta!"})
         }else{
+            req.session.user = user
             res.json({msg:'Login realizado'})
-            req.session.user = { email: users[0].email}
         }
     }else{
         res.json({msgerr:"email nao encontrado"})

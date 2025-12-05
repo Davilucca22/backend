@@ -1,12 +1,11 @@
-import User from "../models/UserModel.js"
 import session from "express-session"
 
 export const Feed = async (req,res) => {
     try{
-        const EmailSession = req.session.user
-        const users = await User.findOne({email:EmailSession.email})
+        const sessao = req.session.user
+        console.log(sessao)
 
-        res.json(users)
+        res.json(sessao)
 
     }catch(e){
         console.log(e)

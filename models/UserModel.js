@@ -24,6 +24,16 @@ const UserSchema = new mongoose.Schema({
     posts:{
         type:Array,
         required:false        
+    },
+    infos:{
+        seguidores:{
+            type:Number,
+            default:5
+        },
+        seguindo:{
+            type:Number,
+            default:4 
+        }
     }
 })
 

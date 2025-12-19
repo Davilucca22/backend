@@ -7,6 +7,7 @@ const registro = require('./controllers/registrocontroller')
 const feed = require('./controllers/feedcontroller')
 const login = require('./controllers/logincontroller')
 const perfil = require('./controllers/perfilController')
+const publicar = require('./controllers/postaFTcontroller')
 
 const upload = multer({storage:multer.memoryStorage()})
 
@@ -19,6 +20,8 @@ router.post('/login',login.Login)
 router.get('/feed',feed.Feed)
 
 router.get('/perfil',perfil.Perfil)
+
+router.put('/postar',publicar.Postar)
 
 module.exports = router
 

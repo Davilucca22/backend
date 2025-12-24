@@ -21,9 +21,12 @@ router.get('/feed',feed.Feed)
 
 router.get('/perfil',perfil.Perfil)
 
-router.put('/postar',publicar.Postar)
+router.put('/postar',upload.single("img"), publicar.Postar)
 
 module.exports = router
 
 
+//GET - pega
+//POST - cria
 //PUT - Atualiza
+//DELETE - deleta

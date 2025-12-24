@@ -15,7 +15,7 @@ export const Login = async (req,res) =>{
         if(!compSenha){ 
             res.json({msgerr:"senha incorreta!"})
         }else{
-            req.session.user = user
+            req.session.user = dados.email
             res.json({msg:'Login realizado'})
         }
     }else{

@@ -4,12 +4,8 @@ import session from "express-session"
 import User from "../models/UserModel.js"
 
 export const Postar =  async (req,res) => {
-
+    
     const sessao = req.session.user
-    req.session.user = sessao
-
-    res.json({msg:"dados recebidos"})
-
     try{
 
         const upload = multer({storage:multer.memoryStorage()})
@@ -17,17 +13,20 @@ export const Postar =  async (req,res) => {
         const {comentario} = req.body
         const file = req.file
 
-        if(file){
-            
-            const URLfoto = SalvaS3(file)
-            
-            const localFoto = URLfoto.then(res => res)
-
-            const novo = {img:localFoto, texto:comentario}
-
-            const dados = await User.updateOne({email:sessao},{$push:{posts:novo}})
-
+        if(!file){
+           return res.status(400).json({erro:'arquivo nao enviado'})
         }
+
+        const URLfoto = await SalvaS3(file)
+
+        await User.updateOne({email:sessao},{$push:{
+                posts:{
+                    imgURL: URLfoto,
+                    textoPost:comentario
+                }
+            }})
+
+        res.json({msg:"dados recebidos"})
 
     }catch(e){
         console.log("erro gerado: ", e)

@@ -21,10 +21,22 @@ const UserSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    posts:{
-        type:Array,
-        require:false      
-    },
+    
+    posts:[{
+        imgURL:{
+            type:String,
+            required:true
+        },
+        textoPost:{
+            type:String,
+            required:false
+        },
+        criadoem:{
+            type:Date,
+            default:Date.now()
+        }
+    }],
+
     infos:{
         seguidores:{
             type:Number,

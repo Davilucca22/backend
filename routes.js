@@ -8,6 +8,7 @@ const feed = require('./controllers/feedcontroller')
 const login = require('./controllers/logincontroller')
 const perfil = require('./controllers/perfilController')
 const publicar = require('./controllers/postaFTcontroller')
+const sessao = require('./controllers/sessaocontroller')
 
 const upload = multer({storage:multer.memoryStorage()})
 
@@ -16,6 +17,8 @@ router.get('/', home.olaMundo)
 router.post('/register',upload.single("foto") ,registro.cadastro)
 
 router.post('/login',login.Login)
+
+router.get('/session',sessao.Sessao) // lida apenas com a sessao
 
 router.get('/feed',feed.Feed)
 

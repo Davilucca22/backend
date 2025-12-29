@@ -1,13 +1,24 @@
-import session from "express-session"
 import User from "../models/UserModel.js"
 
 export const Feed = async (req,res) => {
     try{
-        const sessao = req.session.user
-        
-        const usuario =  await User.find({email:sessao}) //retorna um array com os resultados, por isso deve usar [0]
+        const page = Number(req.query.page) || 1 //pega a query do endpoint ou 1
+        const limit = 10 // limite de paginas
+        const skip = (page - 1) * limit //pula paginas anteriores
 
-        res.json(usuario[0])
+        const totalUsers = await User.countDocuments() // total de documentos no BD
+
+        const users = await User.find()
+        .sort({criadoem: -1}) //mais recente antes
+        .skip(skip)
+        .limit(limit)
+
+        res.json({
+            page,
+            totalPage: Math.ceil(totalUsers / limit),
+            data: users
+        })
+
 
     }catch(e){
         console.log(e)

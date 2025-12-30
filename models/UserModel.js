@@ -1,3 +1,4 @@
+const { text } = require('express')
 const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema({
@@ -34,7 +35,20 @@ const UserSchema = new mongoose.Schema({
         criadoem:{
             type:Date,
             default:Date.now()
-        }
+        },
+        curtidas:{
+            type:Number,
+            default:5
+            
+        },
+        comentarios:[{
+            textoComentario:{
+                type: String
+            },
+            donoComentario:{
+                type:String
+            }
+        }]
     }],
 
     infos:{

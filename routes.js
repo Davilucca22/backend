@@ -9,6 +9,7 @@ const login = require('./controllers/logincontroller')
 const perfil = require('./controllers/perfilController')
 const publicar = require('./controllers/postaFTcontroller')
 const sessao = require('./controllers/sessaocontroller')
+const curtir = require('./controllers/cutircontroller')
 
 const upload = multer({storage:multer.memoryStorage()})
 
@@ -21,6 +22,8 @@ router.post('/login',login.Login)
 router.get('/session',sessao.Sessao) // lida apenas com a sessao
 
 router.get('/feed',feed.Feed)
+
+router.put('/curtida',curtir.attcurtida)
 
 router.get('/perfil',perfil.Perfil)
 

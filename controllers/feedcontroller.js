@@ -20,9 +20,6 @@ export const Feed = async (req,res) => {
             data: users
         })
 
-
-
-
     }catch(e){
         console.log(e)
     }

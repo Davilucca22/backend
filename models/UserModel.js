@@ -38,7 +38,7 @@ const UserSchema = new mongoose.Schema({
         },
         curtidas:{
             type:Number,
-            default:5
+            default:0
             
         },
         comentarios:[{

@@ -10,7 +10,8 @@ const perfil = require('./controllers/perfilController')
 const publicar = require('./controllers/postaFTcontroller')
 const sessao = require('./controllers/sessaocontroller')
 const curtir = require('./controllers/cutircontroller')
-
+const comentarios = require('./controllers/comentariocontroller')
+ 
 const upload = multer({storage:multer.memoryStorage()})
 
 router.get('/', home.olaMundo)
@@ -29,8 +30,9 @@ router.get('/perfil',perfil.Perfil)
 
 router.put('/postar',upload.single("img"), publicar.Postar)
 
-module.exports = router
+router.put('/comentario',comentarios.comentario)
 
+module.exports = router
 
 //GET - pega
 //POST - cria

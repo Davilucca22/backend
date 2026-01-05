@@ -39,13 +39,15 @@ const UserSchema = new mongoose.Schema({
         curtidas:{
             type:Number,
             default:0
-            
         },
         comentarios:[{
             textoComentario:{
                 type: String
             },
             donoComentario:{
+                type:String
+            },
+            fotoDono:{
                 type:String
             }
         }]

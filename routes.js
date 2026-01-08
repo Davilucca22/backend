@@ -11,6 +11,7 @@ const publicar = require('./controllers/postaFTcontroller')
 const sessao = require('./controllers/sessaocontroller')
 const curtir = require('./controllers/cutircontroller')
 const comentarios = require('./controllers/comentariocontroller')
+const atualizaDados = require('./controllers/attdadoscontroller')
  
 const upload = multer({storage:multer.memoryStorage()})
 
@@ -31,6 +32,8 @@ router.get('/perfil',perfil.Perfil)
 router.put('/postar',upload.single("img"), publicar.Postar)
 
 router.put('/comentario',comentarios.comentario)
+
+router.put('/attdados',atualizaDados.attdados)
 
 module.exports = router
 

@@ -7,7 +7,7 @@ export const Feed = async (req,res) => {
             {$sample:{size:10}}, //pega usuarios aleatorios
             {$unwind:"$posts"}, //transforma array de posts em docs individuais
             {$sample:{size:30}}, //posts aleatorios desses usuarios
-            {$project:{ //estrutura que ira para o front
+            {$project:{ //estrutura que irá para o front
                 _id:0,
                 userId:"$_id",
                 name: 1,

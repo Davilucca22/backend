@@ -5,14 +5,12 @@ import User from "../models/UserModel.js"
 export const Sessao = async (req,res) =>{
     try{
 
-        const email = req.session.user
-        const usuario = await User.findOne({email})
+        const id = req.session.user
+        const usuario = await User.findById(id)
 
         res.json(usuario)
 
     }catch(e){
-
         console.log("ERR: ", e)
-
     }
 }

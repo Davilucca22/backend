@@ -55,7 +55,7 @@ export const cadastro = async (req,res) =>{
         }else{
             const infos = {name:nome, email:email, senha:SenhaHash, fotoPerfil:fotoURL, dataNasc:dataNasc, posts:[],infos:{seguidores: 0, seguindo: 0}}
             const user = await User.create(infos) //salva dados no banco de dados
-            req.session.user = email
+            req.session.user = user._id.toString()
             res.json({msg:"seja bem vindo"})
         }
 

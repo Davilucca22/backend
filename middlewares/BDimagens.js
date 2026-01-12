@@ -1,13 +1,13 @@
 import {v4 as uuid} from "uuid"
 import AWS from 'aws-sdk'
 
-export const SalvaS3 = async (imagem) =>{
+const S3 = new AWS.S3({
+    accessKeyId:process.env.AWS_ACESS_KEY_ID,
+    secretAccessKey:process.env.AWS_SECRET_ACESS_KEY,
+    region:process.env.AWS_REGION
+})
 
-    const S3 = new AWS.S3({
-        accessKeyId:process.env.AWS_ACESS_KEY_ID,
-        secretAccessKey:process.env.AWS_SECRET_ACESS_KEY,
-        region:process.env.AWS_REGION
-    })
+export const SalvaS3 = async (imagem) =>{
 
     let key
     let fotoURL
@@ -33,4 +33,16 @@ export const SalvaS3 = async (imagem) =>{
 
         return `https://${process.env.S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}` //url da foto
     }
+}
+
+export const DeletaS3 = async (url) => {
+    if(!url) return
+
+    const key = url.split(".amazonaws.com/")[1]
+    console.log("chave:",key)
+
+    await S3.deleteObject({
+        Bucket:process.env.S3_BUCKET_NAME,
+        Key:key
+    }).promise()
 }

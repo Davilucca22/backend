@@ -1,4 +1,4 @@
-const { text } = require('express')
+const { text, request } = require('express')
 const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema({
@@ -22,7 +22,6 @@ const UserSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    
     posts:[{
         imgURL:{
             type:String,
@@ -52,7 +51,6 @@ const UserSchema = new mongoose.Schema({
             }
         }]
     }],
-
     infos:{
         seguidores:{
             type:Number,
@@ -62,6 +60,10 @@ const UserSchema = new mongoose.Schema({
             type:Number,
             default:4 
         }
+    },
+    biografia:{
+        type:String,
+        required:false
     }
 })
 

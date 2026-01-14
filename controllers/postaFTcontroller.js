@@ -19,12 +19,12 @@ export const Postar =  async (req,res) => {
 
         const URLfoto = await SalvaS3(file)
 
-        await User.updateOne({email:sessao},{$push:{
+        await User.findByIdAndUpdate(sessao ,{$push:{
                 posts:{
                     imgURL: URLfoto,
                     textoPost:comentario
                 }
-            }})
+            }},{new:true})
 
         res.json({msg:"dados recebidos"})
 

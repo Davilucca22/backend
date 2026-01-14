@@ -11,10 +11,7 @@ export const EditPerfil = async (req,res) => {
     
         const {nome, bio, foto} = req.body
         const file = req.file
-
-        console.log("ID:",sessao)
-        console.log("URL foto:", foto)
-
+        
         let fotofinal = foto
     
         if(file){

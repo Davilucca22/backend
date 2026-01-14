@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
     dataNasc:{
         type:String,
         required:true
-    },
+    }, 
     posts:[{
         imgURL:{
             type:String,

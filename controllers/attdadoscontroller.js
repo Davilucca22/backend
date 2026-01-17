@@ -2,9 +2,9 @@ import User from "../models/UserModel.js";
 
 export const attdados = async (req,res) => {
 
-    const {data}  = req.body // posts que estao sendo mostrados no feed
+    const {dados}  = req.body // posts que estao sendo mostrados no feed
 
-    const postsIDs = data.map(item => item.post._id) //pega os IDs dos posts
+    const postsIDs = dados.map(item => item.post._id) //pega os IDs dos posts
 
     const users = await User.find( //busca apenas os os posts que estao no feed
         {"posts._id": { $in: postsIDs } },
@@ -19,7 +19,7 @@ export const attdados = async (req,res) => {
         })
     })
 
-    const feedAtualizado = data.map(item => { //atualiza as curtidas e comentarios dos posts
+    const feedAtualizado = dados.map(item => { //atualiza as curtidas e comentarios dos posts
         const postatualizado = postMap.get(item.post._id.toString())
 
         if(postatualizado){

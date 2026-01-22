@@ -6,7 +6,7 @@ export const attdados = async (req,res) => {
 
     const postsIDs = dados.map(item => item.post._id) //pega os IDs dos posts
 
-    const users = await User.find( //busca apenas os os posts que estao no feed
+    const users = await User.find( //busca apenas os os pos qutse estao no feed
         {"posts._id": { $in: postsIDs } },
         { posts:1 }
     )

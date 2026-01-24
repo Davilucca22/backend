@@ -10,9 +10,9 @@ export const feedUser = async (req,res) =>{
         const userId = new mongoose.Types.ObjectId(id)
 
                 const feed = await User.aggregate([
-            {$match:{_id:userId}},
-            {$unwind:'$posts'},
-            {$project:{
+            {$match:{_id:userId}}, //busca por user por id
+            {$unwind:'$posts'}, //divide os posts em objs
+            {$project:{ //formato de retorno
                 _id:0,
                 userId:"$_id",
                 name: 1,

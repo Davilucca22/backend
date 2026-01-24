@@ -51,16 +51,16 @@ const UserSchema = new mongoose.Schema({
             }
         }]
     }],
-    infos:{
-        seguidores:{
-            type:Number,
-            default:5
-        },
-        seguindo:{
-            type:Number,
-            default:4 
+    seguidores:[{
+        IDseguidor:{
+            type:String
         }
-    },
+    }],
+    seguindo:[{
+        IDseguindo:{
+            type:String
+        }
+    }],
     biografia:{
         type:String,
         required:false

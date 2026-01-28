@@ -16,6 +16,7 @@ const editperfil = require('./controllers/editusercontroller')
 const editinfo = require('./controllers/editInfocontroller')
 const editsenha = require('./controllers/editsenhacontroller')
 const userFeed = require('./controllers/feedPostsUSercontroller')
+const PerfilAlheio = require('./controllers/perfilOutroscontroller')
  
 const upload = multer({storage:multer.memoryStorage()})
 
@@ -46,6 +47,8 @@ router.put('/editinfo',editinfo.EditaInfo)
 router.put('/editsenha',editsenha.EditSenha)
 
 router.get('/feedUser', userFeed.feedUser)
+
+router.get('/perfiloutro/:id',PerfilAlheio.PerfilOutro)
 
 module.exports = router
 

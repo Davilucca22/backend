@@ -2,7 +2,7 @@ import session from "express-session"
 import User from "../models/UserModel.js"
 import mongoose from "mongoose"
 
-
+//faz um feed apenas com os posts do usuario, para ser renderizado em seu perfil
 export const feedUser = async (req,res) =>{
     try{
 
@@ -10,7 +10,7 @@ export const feedUser = async (req,res) =>{
         const userId = new mongoose.Types.ObjectId(id)
 
                 const feed = await User.aggregate([
-            {$match:{_id:userId}}, //busca por user por id
+            {$match:{_id:userId}}, //busca o user por id
             {$unwind:'$posts'}, //divide os posts em objs
             {$project:{ //formato de retorno
                 _id:0,

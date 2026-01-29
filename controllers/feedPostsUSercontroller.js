@@ -6,7 +6,8 @@ import mongoose from "mongoose"
 export const feedUser = async (req,res) =>{
     try{
 
-        const id = req.session.user 
+        const { id } = req.params
+
         const userId = new mongoose.Types.ObjectId(id)
 
                 const feed = await User.aggregate([

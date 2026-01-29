@@ -46,7 +46,7 @@ router.put('/editinfo',editinfo.EditaInfo)
 
 router.put('/editsenha',editsenha.EditSenha)
 
-router.get('/feedUser', userFeed.feedUser)
+router.get('/feedUser/:id', userFeed.feedUser)
 
 router.get('/perfiloutro/:id',PerfilAlheio.PerfilOutro)
 

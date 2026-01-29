@@ -5,7 +5,7 @@ export const Sessao = async (req,res) =>{
     try{
 
         const id = req.session.user 
-        const users = await User.findById(id)
+        const users = await User.findById(id).select("-senha")
 
         res.json(users)
         

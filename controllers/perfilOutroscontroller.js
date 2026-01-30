@@ -7,7 +7,6 @@ export const PerfilOutro = async (req,res) => {
         const { id } = req.params
 
         const feed = await User.findById(id).select('-senha -email -dataNasc')
-        console.log(feed)
 
         res.json(feed)
 

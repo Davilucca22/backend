@@ -17,5 +17,5 @@ export const Seguir = async (req,res) => {
         }
     }})
 
-    res.json({msg:'tudo certo chefia'})
+    res.json({msg:'seguindo'})
 }

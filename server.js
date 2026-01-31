@@ -6,6 +6,7 @@ const route = require('./routes')
 const cors = require('cors')
 const User = require('./models/UserModel')
 const session = require('express-session')
+const MongoStore = require('connect-mongo').default
 
 app.use(cors({
     origin:process.env.URLFRONT,
@@ -24,12 +25,19 @@ mongoose.connect(process.env.URLBANCO).then(() =>{
     }
 })
 
-app.use(session({ //config basica para sessoes
+app.use(session({ //config para sessoes
     secret: 'nlkandklnaklncklasnklasnfkansfklanflknklanklancklnaklnkanfkanfklnklcanksfnfnscbsfdvavav',
     resave:false,
     saveUninitialized:false,
+    store: MongoStore.create({
+        mongoUrl: process.env.URLBANCO,
+        ttl: 14 * 24 * 60 * 60 // 14 dias
+    }),
     cookie:{
-        httpOnly:true
+        httpOnly:true,
+        maxAge: 14 * 24 * 60 * 60 * 1000, // 14 dias em milissegundos
+        sameSite: 'lax', // importante para CORS funcionar corretamente
+        secure: false // true apenas em produção com HTTPS
     }
 }))
 

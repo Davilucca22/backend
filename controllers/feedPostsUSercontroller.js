@@ -24,7 +24,7 @@ export const feedUser = async (req,res) =>{
                     textoPost:"$posts.textoPost",
                     criadoem:"$posts.criadoem",
                     curtidas:"$posts.curtidas",
-                    comentarios:"$posts.comentarios"
+                    comentarios:"$posts.comentarios",
                 },
             }}  
 

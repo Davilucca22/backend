@@ -35,10 +35,9 @@ const UserSchema = new mongoose.Schema({
             type:Date,
             default:Date.now()
         },
-        curtidas:{
-            type:Number,
-            default:0
-        },
+        curtidas:[{
+            type:String
+        }],
         comentarios:[{
             textoComentario:{
                 type: String

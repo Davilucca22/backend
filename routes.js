@@ -32,7 +32,7 @@ router.get('/session',sessao.Sessao) // lida apenas com a sessao
 
 router.get('/feed',feed.Feed)
 
-router.put('/:id/curtida',curtir.attcurtida)
+router.put('/curtida',curtir.attcurtida)
 
 router.get('/perfil',perfil.Perfil)
 

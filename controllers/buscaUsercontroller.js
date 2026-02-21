@@ -6,7 +6,5 @@ export const Busca = async (req,res) =>{
     const users = await User.find({name:{ $regex: nome, $options:'i'}}) //regex verifica se contem a string passada na chave; options ignora M e m
     .select('-senha -email -posts -seguindo -seguidores -dataNasc') // tira esses dados do retorno pro front
 
-    console.log(users)
-
     res.json(users)
 }

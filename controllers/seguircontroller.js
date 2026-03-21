@@ -2,18 +2,25 @@ import session from "express-session"
 import User from "../models/UserModel.js"
 
 export const Seguir = async (req,res) => {
-    const {IdOutro} = req.body
-    const sessao = req.session.user
+    const {IdOutro, nameSeguindo, urlFoto} = req.body
 
-    const Eu = await User.findByIdAndUpdate(sessao,{$push:{
+    const sessao = req.session.user //apenas o id da sessao
+
+    const users = await User.findById(sessao) //dados do usuario da sessao
+
+    const Eu = await User.findByIdAndUpdate(sessao,{$push:{ //adiciona a lista de seguindo do usuario da sessao
         seguindo:{
-            IDseguindo:IdOutro
+            IDseguindo:IdOutro,
+            nameSeguindo,
+            urlFoto
         }
     }})
 
-    const Ele = await User.findByIdAndUpdate(IdOutro,{$push:{
+    const Ele = await User.findByIdAndUpdate(IdOutro,{$push:{ //adiciona a lista de seguidores do usuario clicado
         seguidores:{
-            IDseguidor:sessao
+            IDseguidor:sessao,
+            nameSeguidor:users.name,
+            urlFoto:users.fotoPerfil
         }
     }})
 

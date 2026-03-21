@@ -13,7 +13,7 @@ export const feedUser = async (req,res) =>{
                 const feed = await User.aggregate([
             {$match:{_id:userId}}, //busca o user por id
             {$unwind:'$posts'}, //divide os posts em objs
-            {$project:{ //formato de retorno
+            {$project:{ //cada obj tem essa estrutura
                 _id:0,
                 userId:"$_id",
                 name: 1,

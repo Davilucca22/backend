@@ -53,10 +53,22 @@ const UserSchema = new mongoose.Schema({
     seguidores:[{
         IDseguidor:{
             type:String
+        },
+        nameSeguidor:{
+            type:String
+        },
+        urlFoto:{
+            type:String
         }
     }],
     seguindo:[{
         IDseguindo:{
+            type:String
+        },
+        nameSeguindo:{
+            type:String
+        },
+        urlFoto:{
             type:String
         }
     }],

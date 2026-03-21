@@ -36,8 +36,8 @@ app.use(session({ //config para sessoes
     cookie:{
         httpOnly:true,
         maxAge: 14 * 24 * 60 * 60 * 1000, // 14 dias em milissegundos
-        sameSite: 'none', // importante para CORS funcionar corretamente
-        secure: true // true apenas em produção com HTTPS
+        sameSite: 'lax', // importante para CORS funcionar corretamente
+        secure: false // true apenas em produção com HTTPS
     }
 }))
 

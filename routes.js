@@ -20,10 +20,11 @@ const PerfilAlheio = require('./controllers/perfilOutroscontroller')
 const seguir = require('./controllers/seguircontroller')
 const desSegue = require('./controllers/deixardeseguircontroller')
 const buscar = require('./controllers/buscaUsercontroller')
+const DeletaFoto = require('./controllers/deletaFoto')
  
 const upload = multer({storage:multer.memoryStorage()})
 
-router.get('/', home.olaMundo)
+router.get('/', home.olaMundo) //nao faz nada mas se tirar o servidor quebra
 
 router.post('/register',upload.single("foto") ,registro.cadastro)
 
@@ -58,6 +59,8 @@ router.put('/Seguir', seguir.Seguir)
 router.put('/deixarDeSeguir',desSegue.DeixaSeguir)
 
 router.get('/buscar',buscar.Busca)
+
+router.delete('/Delete',DeletaFoto.DeletaFoto)
 
 module.exports = router
 

@@ -9,9 +9,9 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo').default
 
 app.use(cors({
-    origin:process.env.URLFRONT,
-    credentials:true
-})) //permite se comunicar apenas com a url passada
+    origin: true, // permite qualquer origem
+    credentials: true
+})) //permite se comunicar com qualquer URL
 
 app.use(Express.json()) //trata JSON antes das  rotas
 app.use(Express.urlencoded({extended:true})) //trata o body da requisiçao

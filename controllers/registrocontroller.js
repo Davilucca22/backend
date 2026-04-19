@@ -5,7 +5,6 @@ import argon2 from 'argon2'
 import multer from "multer"
 import {v4 as uuid} from "uuid"
 import AWS from 'aws-sdk'
-import session from 'express-session'
 
 const upload = multer({storage:multer.memoryStorage()}) //armazena os arquivos enviados pelo front direto na memória RAM, e não no disco local.
 
@@ -20,7 +19,12 @@ export const cadastro = async (req,res) =>{
 
         const {nome, email,senha,dataNasc} = req.body 
         const file = req.file
-     
+        
+        console.log(nome)
+        console.log(email)
+        console.log(senha)
+        console.log(dataNasc)
+
         const SenhaHash = await argon2.hash(senha) //criptografia na senha
 
         let key 
@@ -51,11 +55,10 @@ export const cadastro = async (req,res) =>{
         const users = await User.findOne({ email })
 
         if(users){
-            res.json({msg:"Email ja cadastrado"})
+            res.json({msgerr:"Email ja cadastrado"})
         }else{
             const infos = {name:nome, email:email, senha:SenhaHash, fotoPerfil:fotoURL, dataNasc:dataNasc, posts:[],infos:{seguidores: 0, seguindo: 0}}
             const user = await User.create(infos) //salva dados no banco de dados
-            req.session.user = user._id.toString()
             res.json({msg:"seja bem vindo"})
         }
 

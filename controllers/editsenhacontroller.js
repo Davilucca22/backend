@@ -1,12 +1,12 @@
 import User from "../models/UserModel.js";
-import session from "express-session";
 import { verify, hash } from "argon2";
-import { Sessao } from "./sessaocontroller.js";
 
 export const EditSenha = async (req,res) =>{
     try{
-        const sessao = req.session.user
+        const sessao = req.user.id
         const {senhaAtual, senhaNova} = req.body
+        console.log(senhaAtual)
+        console.log(senhaNova)
 
         const users = await User.findById(sessao)
 

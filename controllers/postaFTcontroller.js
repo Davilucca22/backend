@@ -1,11 +1,10 @@
 import multer from "multer"
 import { SalvaS3 } from "../middlewares/BDimagens.js"
-import session from "express-session"
 import User from "../models/UserModel.js"
 
 export const Postar =  async (req,res) => {
     
-    const sessao = req.session.user
+    const sessao = req.user.id
     try{
 
         const upload = multer({storage:multer.memoryStorage()})

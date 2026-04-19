@@ -1,10 +1,9 @@
-import session from "express-session"
 import User from "../models/UserModel.js"
 
 export const Seguir = async (req,res) => {
     const {IdOutro, nameSeguindo, urlFoto} = req.body
 
-    const sessao = req.session.user //apenas o id da sessao
+    const sessao = req.user.id //apenas o id do usuario autenticado
 
     const users = await User.findById(sessao) //dados do usuario da sessao
 

@@ -1,4 +1,3 @@
-import session from "express-session"
 import User from "../models/UserModel.js"
 import mongoose from "mongoose"
 

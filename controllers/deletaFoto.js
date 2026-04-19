@@ -13,9 +13,12 @@ export const DeletaFoto = async (req, res) => {
         for (const user of users) {
             const postIndex = user.posts.findIndex(post => post._id.toString() === IDpost);
             if (postIndex !== -1) {
+    
                 const post = user.posts[postIndex];
+    
                 await DeletaS3(post.imgURL);
                 user.posts.splice(postIndex, 1);
+
                 await user.save(); //atualiza o banco de dados do usuário após deletar a foto
             }
         }

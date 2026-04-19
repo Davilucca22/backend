@@ -21,6 +21,7 @@ const seguir = require('./controllers/seguircontroller')
 const desSegue = require('./controllers/deixardeseguircontroller')
 const buscar = require('./controllers/buscaUsercontroller')
 const DeletaFoto = require('./controllers/deletaFoto')
+const { verifyToken } = require('./middlewares/authMiddleware')
  
 const upload = multer({storage:multer.memoryStorage()})
 
@@ -30,37 +31,37 @@ router.post('/register',upload.single("foto") ,registro.cadastro)
 
 router.post('/login',login.Login)
 
-router.get('/session',sessao.Sessao) // lida apenas com a sessao
+router.get('/session', verifyToken, sessao.Sessao) // lida apenas com a sessao
 
-router.get('/feed',feed.Feed)
+router.get('/feed', verifyToken, feed.Feed)
 
-router.put('/curtida',curtir.attcurtida)
+router.put('/curtida', verifyToken, curtir.attcurtida)
 
-router.get('/perfil',perfil.Perfil)
+router.get('/perfil', verifyToken, perfil.Perfil)
 
-router.put('/postar',upload.single("img"), publicar.Postar)
+router.put('/postar', verifyToken, upload.single("img"), publicar.Postar)
 
-router.put('/comentario',comentarios.comentario)
+router.put('/comentario', verifyToken, comentarios.comentario)
 
-router.put('/attdados',atualizaDados.attdados)
+router.put('/attdados', verifyToken, atualizaDados.attdados)
 
-router.put('/editperfil',upload.single("novafoto"),editperfil.EditPerfil)
+router.put('/editperfil', verifyToken, upload.single("novafoto"), editperfil.EditPerfil)
 
-router.put('/editinfo',editinfo.EditaInfo)
+router.put('/editinfo', verifyToken, editinfo.EditaInfo)
 
-router.put('/editsenha',editsenha.EditSenha)
+router.put('/editsenha', verifyToken, editsenha.EditSenha)
 
-router.get('/feedUser/:id', userFeed.feedUser)
+router.get('/feedUser/:id', verifyToken, userFeed.feedUser)
 
-router.get('/perfiloutro/:id',PerfilAlheio.PerfilOutro)
+router.get('/perfiloutro/:id', verifyToken, PerfilAlheio.PerfilOutro)
 
-router.put('/Seguir', seguir.Seguir)
+router.put('/Seguir', verifyToken, seguir.Seguir)
 
-router.put('/deixarDeSeguir',desSegue.DeixaSeguir)
+router.put('/deixarDeSeguir', verifyToken, desSegue.DeixaSeguir)
 
-router.get('/buscar',buscar.Busca)
+router.get('/buscar', verifyToken, buscar.Busca)
 
-router.delete('/Delete',DeletaFoto.DeletaFoto)
+router.delete('/Delete', verifyToken, DeletaFoto.DeletaFoto)
 
 module.exports = router
 

@@ -1,16 +1,17 @@
 import multer from "multer";
 import User from "../models/UserModel.js";
-import session, { Session } from "express-session";
 import { SalvaS3, DeletaS3 } from "../middlewares/BDimagens.js";
 
 export const EditPerfil = async (req,res) => {
-    const sessao = req.session.user
+    const sessao = req.user.id
 
     try{
         const upload = multer({storage:multer.memoryStorage()})
     
         const {nome, bio, foto} = req.body
         const file = req.file
+
+        console.log(nome)
         
         let fotofinal = foto
     

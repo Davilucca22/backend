@@ -1,8 +1,7 @@
 import User from "../models/UserModel.js"
-import session from "express-session"
 
 export const EditaInfo = async (req,res) =>{
-    const sessao = req.session.user
+    const sessao = req.user.id
     const {email, dataNasc } = req.body
 
     try{

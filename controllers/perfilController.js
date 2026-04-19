@@ -1,9 +1,8 @@
-import session from "express-session"
 import User from "../models/UserModel.js"
 
 export const Perfil = async (req,res) =>{
     try{
-        const sessao = req.session.user
+        const sessao = req.user.id
 
         const users = await User.findById(sessao)
 

@@ -1,9 +1,8 @@
-import session from "express-session";
 import User from "../models/UserModel.js";
 
 export const DeixaSeguir = async (req,res) => {
     const { IdOutro } = req.body
-    const sessao = req.session.user
+    const sessao = req.user.id
 
     const Eu = await User.findByIdAndUpdate(sessao,{$pull:{seguindo:{IDseguindo:IdOutro}}}) //tira da lista de pessoas seguindo
 

@@ -6,9 +6,8 @@ const route = require('./routes')
 const cors = require('cors')
 
 app.use(cors({
-    origin: true, // permite qualquer origem
-    credentials: true
-})) //permite se comunicar com qualquer URL
+    origin: process.env.URLFRONT
+}))
 
 app.use(Express.json()) //trata JSON antes das  rotas
 app.use(Express.urlencoded({extended:true})) //trata o body da requisiçao

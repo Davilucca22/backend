@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 import User from "../models/UserModel.js"
 import argon2 from 'argon2'
+import jwt from 'jsonwebtoken'
 import multer from "multer"
 import {v4 as uuid} from "uuid"
 import AWS from 'aws-sdk'
@@ -19,11 +20,6 @@ export const cadastro = async (req,res) =>{
 
         const {nome, email,senha,dataNasc} = req.body 
         const file = req.file
-        
-        console.log(nome)
-        console.log(email)
-        console.log(senha)
-        console.log(dataNasc)
 
         const SenhaHash = await argon2.hash(senha) //criptografia na senha
 
@@ -47,7 +43,7 @@ export const cadastro = async (req,res) =>{
 
         }else{
 
-            key = "usuarios/semfoto/semfoto.jpeg" //se o usuario nao enviar foto, sera usada a foto padrao q esta nesse caminho no S3
+            key = "usuarios/semfoto/sem+foto.jpeg" //se o usuario nao enviar foto, sera usada a foto padrao q esta nesse caminho no S3
 
             fotoURL = `https://${process.env.S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}` //url da foto
         }
@@ -55,11 +51,13 @@ export const cadastro = async (req,res) =>{
         const users = await User.findOne({ email })
 
         if(users){
-            res.json({msgerr:"Email ja cadastrado"})
+            res.json({msgerr:"Email ja cadastrado"}) 
         }else{
             const infos = {name:nome, email:email, senha:SenhaHash, fotoPerfil:fotoURL, dataNasc:dataNasc, posts:[],infos:{seguidores: 0, seguindo: 0}}
             const user = await User.create(infos) //salva dados no banco de dados
-            res.json({msg:"seja bem vindo"})
+            const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '14d' })
+
+            res.json({msg:"seja bem vindo", token})
         }
 
     }catch(err){

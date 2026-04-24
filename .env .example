@@ -7,3 +7,4 @@ AWS_REGION=regiao_do_Bucket
 S3_BUCKET_NAME=nome_do_seu_Bucket
 SENHA_CONSOLE=sua senha aqui
 SECRET:chavesecretaaleatoria
+JWT_SECRET=seu_segredo_aqui
